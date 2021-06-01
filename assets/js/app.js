@@ -73,4 +73,35 @@ function makeResponsive() {
       return xAxis;
     }
 
+    // updating yAxis when axis label is selected
+    function renderYAxes(newYScale, yAxis) {
+      var leftAxis = d3.axisLeft(newYScale);
+      yAxis.transition()
+        .duration(1000)
+        .call(leftAxis);
+      return yAxis;
+    }
+  
+    // updating circles with transition  
+    function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
+  
+      circlesGroup.transition()
+        .duration(1000)
+        .attr("cx", d => newXScale(d[chosenXAxis]))
+        .attr("cy", d => newYScale(d[chosenYAxis]));
+      return circlesGroup;
+    }
+  
+    // updating text transition 
+    function renderText(textGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
+  
+      textGroup.transition()
+        .duration(1000)
+        .attr("x", d => newXScale(d[chosenXAxis]))
+        .attr("y", d => newYScale(d[chosenYAxis]))
+        .attr("text-anchor", "middle");
+  
+      return textGroup;
+    }
+
     
