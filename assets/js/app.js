@@ -124,6 +124,36 @@ function makeResponsive() {
       }
       else {
         var yLabel = "Smokes (%)";
-      }
+    }
+
+    // initialize 
+    var toolTip = d3.tip()
+      .attr("class", "tooltip d3-tip")
+      .offset([90, 90])
+      .html(function(d) {
+        return (`<strong>${d.abbr}</strong><br>${xLabel} ${d[chosenXAxis]}<br>${yLabel} ${d[chosenYAxis]}`);
+      });
+    // create circles in the chart
+    circlesGroup.call(toolTip);
+    // display and hide circles 
+    circlesGroup.on("mouseover", function(data) {
+      toolTip.show(data, this);
+    })
+      // onmouseout event
+      .on("mouseout", function(data) {
+        toolTip.hide(data);
+      });
+    // create text in the chart
+    textGroup.call(toolTip);
+    // display and hide the text 
+    textGroup.on("mouseover", function(data) {
+      toolTip.show(data, this);
+    })
+      // onmouseout event
+      .on("mouseout", function(data) {
+        toolTip.hide(data);
+      });
+    return circlesGroup;
+  }
 
     
