@@ -104,4 +104,26 @@ function makeResponsive() {
       return textGroup;
     }
 
+    // updating circles with Tooltip
+    function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
+  
+      if (chosenXAxis === "poverty") {
+        var xLabel = "Poverty (%)";
+      }
+      else if (chosenXAxis === "age") {
+        var xLabel = "Age (Median)";
+      }
+      else {
+        var xLabel = "Household Income (Median)";
+      }
+      if (chosenYAxis === "healthcare") {
+        var yLabel = "Lacks Healthcare (%)";
+      }
+      else if (chosenYAxis === "obesity") {
+        var yLabel = "Obese (%)";
+      }
+      else {
+        var yLabel = "Smokes (%)";
+      }
+
     
