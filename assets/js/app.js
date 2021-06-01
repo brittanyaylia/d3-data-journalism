@@ -42,7 +42,7 @@ function makeResponsive() {
     var chosenXAxis = "poverty";
     var chosenYAxis = "healthcare";
   
-    // updating chart when xaxis is pressed
+    // updating xScale when xaxis options are selected 
     function xScale(acsData, chosenXAxis) {
       // scale functions
       var xLinearScale = d3.scaleLinear()
@@ -51,6 +51,26 @@ function makeResponsive() {
         ])
         .range([0, width]);
       return xLinearScale;
+    }
+
+    //  updating yScale wjen yaxis options are selected
+    function yScale(acsData, chosenYAxis) {
+      // scale functions 
+      var yLinearScale = d3.scaleLinear()
+        .domain([d3.min(acsData, d => d[chosenYAxis]) * 0.8,
+          d3.max(acsData, d => d[chosenYAxis]) * 1.2
+        ])
+        .range([height, 0]);
+      return yLinearScale;
+    }
+  
+    // updating xAxis when axis label is selected 
+    function renderXAxes(newXScale, xAxis) {
+      var bottomAxis = d3.axisBottom(newXScale);
+      xAxis.transition()
+        .duration(1000)
+        .call(bottomAxis);
+      return xAxis;
     }
 
     
