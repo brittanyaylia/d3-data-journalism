@@ -154,6 +154,20 @@ function makeResponsive() {
         toolTip.hide(data);
       });
     return circlesGroup;
-  }
+}
+
+// import data from csv
+d3.csv("assets/data/data.csv")
+  .then(function(acsData) {
+
+  // parse data
+  acsData.forEach(function(data) {
+    data.poverty = +data.poverty;
+    data.age = +data.age;
+    data.income = +data.income;
+    data.healthcare = +data.healthcare;
+    data.obesity = +data.obesity;
+    data.smokes = +data.smokes;
+  });
 
     
