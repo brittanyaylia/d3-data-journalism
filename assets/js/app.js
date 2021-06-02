@@ -168,6 +168,73 @@ d3.csv("assets/data/data.csv")
     data.healthcare = +data.healthcare;
     data.obesity = +data.obesity;
     data.smokes = +data.smokes;
-  });
+});
 
+// xLinearScale & yLinearScale functions 
+var xLinearScale = xScale(acsData, chosenXAxis);
+var yLinearScale = yScale(acsData, chosenYAxis);
+
+// axis functions for charts
+var bottomAxis = d3.axisBottom(xLinearScale);
+var leftAxis = d3.axisLeft(yLinearScale);
+
+// append xaxis
+var xAxis = chartGroup.append("g")
+  .classed("x-axis", true)
+  .attr("transform", `translate(0, ${height})`)
+  .call(bottomAxis);
+
+// append yaxis 
+var yAxis = chartGroup.append("g")
+  .classed("y-axis", true)
+  .call(leftAxis);
+
+// append circles
+var circlesGroup = chartGroup.selectAll(".stateCircle")
+  .data(acsData)
+  .enter()
+  .append("circle")
+  .attr("cx", d => xLinearScale(d[chosenXAxis]))
+  .attr("cy", d => yLinearScale(d[chosenYAxis]))
+  .attr("class", "stateCircle")
+  .attr("r", 15)
+  .attr("opacity", ".75");
+
+// append text 
+var textGroup = chartGroup.selectAll(".stateText")
+  .data(acsData)
+  .enter()
+  .append("text")
+  .attr("x", d => xLinearScale(d[chosenXAxis]))
+  .attr("y", d => yLinearScale(d[chosenYAxis]*.98))
+  .text(d => (d.abbr))
+  .attr("class", "stateText")
+  .attr("font-size", "12px")
+  .attr("text-anchor", "middle")
+  .attr("fill", "white");
+
+// group for all xaxis Labels
+  var xLabelsGroup = chartGroup.append("g")
+  .attr("transform", `translate(${width / 2}, ${height + 20})`);
+// append xaxis
+var povertyLabel = xLabelsGroup.append("text")
+  .attr("x", 0)
+  .attr("y", 20)
+  .attr("value", "poverty") // Value to Grab for Event Listener
+  .classed("active", true)
+  .text("Poverty (%)");
+
+var ageLabel = xLabelsGroup.append("text")
+  .attr("x", 0)
+  .attr("y", 40)
+  .attr("value", "age") // Value to Grab for Event Listener
+  .classed("inactive", true)
+  .text("Age (Median)");
+
+var incomeLabel = xLabelsGroup.append("text")
+  .attr("x", 0)
+  .attr("y", 60)
+  .attr("value", "income") // Value to Grab for Event Listener
+  .classed("inactive", true)
+  .text("Household Income (Median)");
     
