@@ -16,8 +16,8 @@ body {
 
 h1 {
   color: cornflowerblue;
-  font-family: Papyrus, fantasy;
-  font-size: 24px;
+  font-family: "Lucida Console", "Courier New", monospace;
+  font-size: 30px;
 }
 
 #footer {
