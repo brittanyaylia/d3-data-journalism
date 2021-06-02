@@ -220,21 +220,55 @@ var textGroup = chartGroup.selectAll(".stateText")
 var povertyLabel = xLabelsGroup.append("text")
   .attr("x", 0)
   .attr("y", 20)
-  .attr("value", "poverty") // Value to Grab for Event Listener
+  .attr("value", "poverty") 
   .classed("active", true)
   .text("Poverty (%)");
 
 var ageLabel = xLabelsGroup.append("text")
   .attr("x", 0)
   .attr("y", 40)
-  .attr("value", "age") // Value to Grab for Event Listener
+  .attr("value", "age") 
   .classed("inactive", true)
   .text("Age (Median)");
 
 var incomeLabel = xLabelsGroup.append("text")
   .attr("x", 0)
   .attr("y", 60)
-  .attr("value", "income") // Value to Grab for Event Listener
+  .attr("value", "income") 
   .classed("inactive", true)
   .text("Household Income (Median)");
+
+  // group for all yaxis labels
+  var yLabelsGroup = chartGroup.append("g")
+  .attr("transform", `translate(-25, ${height / 2})`);
+// append yaxis
+var healthcareLabel = yLabelsGroup.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", -30)
+  .attr("x", 0)
+  .attr("value", "healthcare")
+  .attr("dy", "1em")
+  .classed("axis-text", true)
+  .classed("active", true)
+  .text("Lacks Healthcare (%)");
+
+var smokesLabel = yLabelsGroup.append("text") 
+  .attr("transform", "rotate(-90)")
+  .attr("y", -50)
+  .attr("x", 0)
+  .attr("value", "smokes")
+  .attr("dy", "1em")
+  .classed("axis-text", true)
+  .classed("inactive", true)
+  .text("Smokes (%)");
+
+var obesityLabel = yLabelsGroup.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", -70)
+  .attr("x", 0)
+  .attr("value", "obesity")
+  .attr("dy", "1em")
+  .classed("axis-text", true)
+  .classed("inactive", true)
+  .text("Obese (%)");
     
